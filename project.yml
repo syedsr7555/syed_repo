@@ -1,37 +1,61 @@
+[name](/reference/project-configs/name): string
 
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
-name: 'dbt_project'
-version: '1.0.0'
-config-version: 2
+[config-version](/reference/project-configs/config-version): 2
+[version](/reference/project-configs/version): version
 
-# This setting configures which "profile" dbt uses for this project.
-profile: 'my-warehouse'
+[profile](/reference/project-configs/profile): profilename
 
-# These configurations specify where dbt should look for different types of files.
-# The `source-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
-model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
-seed-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
+[model-paths](/reference/project-configs/model-paths): [directorypath]
+[seed-paths](/reference/project-configs/seed-paths): [directorypath]
+[test-paths](/reference/project-configs/test-paths): [directorypath]
+[analysis-paths](/reference/project-configs/analysis-paths): [directorypath]
+[macro-paths](/reference/project-configs/macro-paths): [directorypath]
+[snapshot-paths](/reference/project-configs/snapshot-paths): [directorypath]
+[docs-paths](/reference/project-configs/docs-paths): [directorypath]
+[asset-paths](/reference/project-configs/asset-paths): [directorypath]
 
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
-  - "target"
-  - "dbt_packages"
+[target-path](/reference/project-configs/target-path): directorypath
+[log-path](/reference/project-configs/log-path): directorypath
+[packages-install-path](/reference/project-configs/packages-install-path): directorypath
 
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
+[clean-targets](/reference/project-configs/clean-targets): [directorypath]
 
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
+[query-comment](/reference/project-configs/query-comment): string
+
+[require-dbt-version](/reference/project-configs/require-dbt-version): version-range | [version-range]
+
+[dbt-cloud](/docs/cloud/cloud-cli-installation):
+  project-id: project_id #Required
+  defer-env-id: 5678 #Optional
+
+[quoting](/reference/project-configs/quoting):
+  database: true | false
+  schema: true | false
+  identifier: true | false
+
 models:
-  dbt_project:
-    # Applies to all files under models/example/
-    example:
-      materialized: table
+  [<model-configs>](/reference/model-configs)
+
+seeds:
+  [<seed-configs>](/reference/seed-configs)
+
+snapshots:
+  [<snapshot-configs>](/reference/snapshot-configs)
+
+sources:
+  [<source-configs>](source-configs)
+  
+tests:
+  [<test-configs>](/reference/test-configs)
+
+vars:
+  [<variables>](/docs/build/project-variables)
+
+[on-run-start](/reference/project-configs/on-run-start-on-run-end): sql-statement | [sql-statement]
+[on-run-end](/reference/project-configs/on-run-start-on-run-end): sql-statement | [sql-statement]
+
+[dispatch](/reference/project-configs/dispatch-config):
+  - macro_namespace: packagename
+    search_order: [packagename]
+
+[restrict-access](/docs/collaborate/govern/model-access): true | false
