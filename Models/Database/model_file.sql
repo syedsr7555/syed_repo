@@ -1,1 +1,0 @@
-C:\Users\61082619\Downloads\model_file.sql
